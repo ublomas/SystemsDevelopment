@@ -49,6 +49,7 @@ public class Play
 		When Date = readDate
 	from Plays
 		
+	//^^ closer to real sql rather than pseudo
     }
 
 	
