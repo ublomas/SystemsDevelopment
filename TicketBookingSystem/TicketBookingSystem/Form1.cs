@@ -16,5 +16,11 @@ namespace TicketBookingSystem
         {
             InitializeComponent();
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Account accountForm = new Account();
+            accountForm.ShowDialog();
+        }
     }
 }

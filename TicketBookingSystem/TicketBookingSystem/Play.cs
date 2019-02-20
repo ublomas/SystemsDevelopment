@@ -1,4 +1,5 @@
-﻿using System;
+﻿/*
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,17 +8,14 @@ using System.Threading.Tasks;
 public class Play
 
 {
-    string title;
+   string title;
     string genre;
-    string description;
+    string description; // include duration of play
     string date;
     string time;
     string ticketType;
     //have to use datetime function to switch from a string into a formatted datetime
     string ticketsAvailable;
-
-
-    float duration;
     int ticketQuantity;
 
     // Might not need any full class variables if arguments are given in by the main. As this class doesn't create any objects with these varialbes, only pushes them between the code and database.
@@ -26,7 +24,7 @@ public class Play
 
     //Unsure on what functionality can be implemented without a linked database being created before hand
 
-    public addPlay(string addTitle, string addDate)
+    //public addPlay(string addTitle, string addDate)
     {
         //pseudocode
         ADD to database IN table Plays(addTitle, addDate, * Other variables*
@@ -62,3 +60,4 @@ public class Play
     //Using both the title and its date as an identifier 
 
 }
+*/
