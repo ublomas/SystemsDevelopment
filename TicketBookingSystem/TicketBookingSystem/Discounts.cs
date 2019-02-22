@@ -8,7 +8,8 @@ namespace TicketBookingSystem
 {
     class Discounts
     {
-        string ticketType; //checks ticket type in order 
+        string ticketType; //checks ticket type in order
+        string seatingBand;
         string nameOfPlay;
         DateTime dateOfPlay;
         int timeOfPlay;
@@ -18,6 +19,22 @@ namespace TicketBookingSystem
         {
 
         }
+
+        public void BuyFourGetOneFree()
+        {
+
+        }
+
+        public void AgencyDiscounts()
+        {
+
+        }
+
+        public void MondayToThusday()
+        {
+
+        }
+
 
 
 

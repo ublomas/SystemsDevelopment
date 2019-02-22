@@ -30,20 +30,47 @@ namespace TicketBookingSystem
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void loginButton_Click(object sender, EventArgs e)
         {
+            string LoginUsername = textBox13.Text;
+            string LoginPassword = textBox14.Text;
+
+
+
+            string connString;
+            connString = @"Provider=Microsoft.JET.OLEDB.4.0;Data Source = L:\Comp-1632-System Development Project\TicketBookingSystem\TicketBookingSystem\TicketSysDB.mdb";
+
+            OleDbConnection myConnection = new OleDbConnection(connString);
+            myConnection.Open();
+            OleDbCommand myCommand = new OleDbCommand("SELECT * FROM [User] WHERE [Username] = @Username" , myConnection);
+
+            myCommand.Parameters.AddWithValue("@Username", LoginUsername);
+            //myCommand.ExecuteNonQuery();
+            
+            OleDbDataReader re = myCommand.ExecuteReader();
+
+            if (re.Read() == true)
+            {
+                MessageBox.Show("Account Found");
+            }
+            else
+            {
+                MessageBox.Show("Account not found");
+            }
+
+            myConnection.Close();
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void signupButton_Click(object sender, EventArgs e)
         {
             RegisterPanel.Visible = true;
             LoginPanel.Visible = false;
 
-            
+
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void submitButton_Click(object sender, EventArgs e)
         {
             string Username = textBox1.Text;
             string Password = textBox2.Text;
@@ -51,52 +78,31 @@ namespace TicketBookingSystem
             string Sname = textBox4.Text;
             string Address = textBox5.Text;
             string PhoneNum = textBox6.Text;
-            string email = textBox7.Text;
+            string Email = textBox7.Text;
 
-            string connString;
-            connString = @"Provider=Microsoft.JET.OLEDB.4.0;Data Source = L:\Comp-1632-System Development Project\TicketBookingSystem\TicketBookingSystem\TicketSysDB.mdb";
 
-            OleDbConnection myConnection = new OleDbConnection(connString);
-            
+            Customer customer = new Customer();
+            customer.AddUser(Username, Password, Fname, Sname, Address, PhoneNum, Email);
+            MessageBox.Show("Account Created");
 
-            //string myQuery = "INSERT INTO Customer( Forename, Surname, Username, Password, PhoneNumber, Address, Email) VALUES (?, ?, ?, ?, ?, ?, ?)";
-             //('" + Fname + "' , '" + Sname + "' , '" + Username + "' , '" + Password + "' , '" + PhoneNum + "' , '" + Address + "' , '" + email + "')";
-
-            
-
-            OleDbCommand myCommand = new OleDbCommand("INSERT INTO Customer (Forename, Surname, Username, [Password], PhoneNumber, Address, Email) VALUES (?, ?, ?, ?, ?, ?, ?)", myConnection);
-
-            myCommand.Parameters.AddWithValue("@Forname", Fname);
-            myCommand.Parameters.AddWithValue("@Surname", Sname);
-            myCommand.Parameters.AddWithValue("@Username", Username);
-            myCommand.Parameters.AddWithValue("@Password", Password);
-            myCommand.Parameters.AddWithValue("@PhoneNumber", PhoneNum);
-            myCommand.Parameters.AddWithValue("@Address", Address);
-            myCommand.Parameters.AddWithValue("@Email", email);
-
-            myConnection.Open();
-            myCommand.ExecuteNonQuery();
-
-            myConnection.Close();
+            string CurrentUsername = "";
 
 
 
-            try
-            {
-                myConnection.Open();
-                myCommand.ExecuteNonQuery();
-                MessageBox.Show("author saved");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Exception in DBHandler" + ex);
-            }
-            finally
-            {
-                myConnection.Close();
-            }
+
+
+            label11.Text = customer.userName;
+
+
+
+
+
+
+
+
 
 
         }
+
     }
 }

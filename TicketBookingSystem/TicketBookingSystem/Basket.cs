@@ -11,6 +11,8 @@ namespace TicketBookingSystem
 
         double basketTotal;
         int ticketsInBasket;
+        List<string> basketItems;
+        string playName;
 
         public void DisplayCurrentTotal()
         {
@@ -34,6 +36,20 @@ namespace TicketBookingSystem
 
         public void AddToBasket()
         {
+
+
+            for (int i = 0; i < basketItems.Count; i++)
+            {
+                /* if the item is already in the list
+                if (basketItems[i]. == playName)
+                {
+                    basketItems[i].UpdateShoppingBasketList(ticketsInBasket, basketTotal);
+                    return;
+                }*/
+            }
+            
+
+
 
         }
 
