@@ -27,7 +27,7 @@ namespace TicketBookingSystem
         public abstract void Login(string user, string pass, bool staff);
         //public abstract void Logout();
         public abstract void AddUser(string user, string pass, string forname, string surname, string address, string phoneNumber, string email);
-        public abstract void DeleteUser();
+        public abstract void DeleteUser(string user, string pass);
         public abstract void DisplayProfile();
         public abstract void GetUserInfo();
         //public abstract void BrowsePlays();
@@ -58,7 +58,7 @@ namespace TicketBookingSystem
 
             OleDbConnection myConnection = new OleDbConnection(connString);
 
-            OleDbCommand myCommand = new OleDbCommand("INSERT INTO User (Forename, Surname, Username, [Password], PhoneNumber, Address, Email) VALUES (?, ?, ?, ?, ?, ?, ?)", myConnection);
+            OleDbCommand myCommand = new OleDbCommand("INSERT INTO [User] (Forename, Surname, Username, [Password], PhoneNumber, Address, Email) VALUES (?, ?, ?, ?, ?, ?, ?)", myConnection);
 
             myCommand.Parameters.AddWithValue("@Forname", forname);
             myCommand.Parameters.AddWithValue("@Surname", surname);
@@ -74,9 +74,24 @@ namespace TicketBookingSystem
 
         }
 
-        public override void DeleteUser()
+        public override void DeleteUser(string user, string pass)
         {
             //delete row from database
+            string connString;
+            connString = @"Provider=Microsoft.JET.OLEDB.4.0;Data Source = L:\Comp-1632-System Development Project\TicketBookingSystem\TicketBookingSystem\TicketSysDB.mdb";
+
+            OleDbConnection myConnection = new OleDbConnection(connString);
+
+            OleDbCommand myCommand = new OleDbCommand("INSERT INTO [User] (Username, [Password]) VALUES (?, ?)", myConnection);
+
+            
+           
+            myCommand.Parameters.AddWithValue("@Username", user);
+            myCommand.Parameters.AddWithValue("@Password", pass);
+           
+            myConnection.Open();
+            myCommand.ExecuteNonQuery();
+            myConnection.Close();
         }
 
         public override void DisplayProfile()
@@ -117,7 +132,7 @@ namespace TicketBookingSystem
             //id = staffID;
         }
 
-        public override void DeleteUser()
+        public override void DeleteUser(string user, string pass)
         {
 
         }

@@ -34,20 +34,29 @@ namespace TicketBookingSystem
         {
             string LoginUsername = textBox13.Text;
             string LoginPassword = textBox14.Text;
+            bool staff = false;
 
 
+            Customer customer = new Customer();
+            customer.Login(LoginUsername, LoginPassword, staff);
 
             string connString;
             connString = @"Provider=Microsoft.JET.OLEDB.4.0;Data Source = L:\Comp-1632-System Development Project\TicketBookingSystem\TicketBookingSystem\TicketSysDB.mdb";
 
             OleDbConnection myConnection = new OleDbConnection(connString);
             myConnection.Open();
-            OleDbCommand myCommand = new OleDbCommand("SELECT * FROM [User] WHERE [Username] = @Username" , myConnection);
+            OleDbCommand myCommand = new OleDbCommand("SELECT * FROM [User] WHERE [Username] = @Username ,  [Password] = @LoginPassword ,  [Staff] = @Staff", myConnection);
 
             myCommand.Parameters.AddWithValue("@Username", LoginUsername);
+            myCommand.Parameters.AddWithValue("@Password", LoginPassword);
+            myCommand.Parameters.AddWithValue("@Staff", staff);
             //myCommand.ExecuteNonQuery();
             
             OleDbDataReader re = myCommand.ExecuteReader();
+
+            
+            //staff = re.GetBoolean(3);
+           // MessageBox.Show("" + staff);
 
             if (re.Read() == true)
             {
@@ -59,6 +68,8 @@ namespace TicketBookingSystem
             }
 
             myConnection.Close();
+            
+           ;
 
         }
 
@@ -86,23 +97,11 @@ namespace TicketBookingSystem
             MessageBox.Show("Account Created");
 
             string CurrentUsername = "";
-
-
-
-
-
-            label11.Text = customer.userName;
-
-
-
-
-
-
-
-
-
+            CurrentUsername = Username;
+            label11.Text = CurrentUsername;
 
         }
 
+       
     }
 }

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,13 +19,13 @@ public class Play
     string ticketsQuantity;
 
     // Might not need any full class variables if arguments are given in by the main. As this class doesn't create any objects with these varialbes, only pushes them between the code and database.
-    
+
 
 
     //Unsure on what functionality can be implemented without a linked database being created before hand
-   
-	
-	
+
+
+
     public void AddPlay(string addTitle, string addGenre, string addDescription, string addDateOfPlay, string addTimeOfPlay, string addTicketsAvailable, string addTicketsQuantity)
     {
         title = addTitle;
@@ -40,23 +40,23 @@ public class Play
 
         string connString;
         connString = @"Provider=Microsoft.JET.OLEDB.4.0;Data Source = L:\Comp-1632-System Development Project\TicketBookingSystem\TicketBookingSystem\TicketSysDB.mdb";
-        OleDbConnection myConnection = new OleDbConnection(connString);  
-	    myConnection.Open();
-        OleDbCommand myCommand = new OleDbCommand("INSERT INTO Play (PlayID, Title, Genre, Description, DateOfPlay, TimeOfPlay, TicketsAvailable, TicketsQuantity) VALUES (?,?,?,?,?,?,?,?)", myConnection);
+        OleDbConnection myConnection = new OleDbConnection(connString);
+        myConnection.Open();
+        OleDbCommand myCommand = new OleDbCommand("INSERT INTO Plays (PlayID, Title, Genre, Description, DateOfPlay, TimeOfPlay, TicketsAvailable, TicketsQuantity) VALUES (?,?,?,?,?,?,?,?)", myConnection);
 
         myCommand.Parameters.AddWithValue("@PlayID", playID);
-	    myCommand.Parameters.AddWithValue("@Title", title);
-	    myCommand.Parameters.AddWithValue("@Genre", genre);
-	    myCommand.Parameters.AddWithValue("@Description", description);
-	    myCommand.Parameters.AddWithValue("@DateOfPlay", date);
-	    myCommand.Parameters.AddWithValue("@TimeOfPlay", time);
-	    myCommand.Parameters.AddWithValue("@TicketsAvailable", ticketsAvailable);
-	    myCommand.Parameters.AddWithValue("@TicketsQuantity", ticketsQuantity);
-	
-	    myCommand.ExecuteNonQuery();
-	    myConnection.Close();
-	    
-	    
+        myCommand.Parameters.AddWithValue("@Title", title);
+        myCommand.Parameters.AddWithValue("@Genre", genre);
+        myCommand.Parameters.AddWithValue("@Description", description);
+        myCommand.Parameters.AddWithValue("@DateOfPlay", date);
+        myCommand.Parameters.AddWithValue("@TimeOfPlay", time);
+        myCommand.Parameters.AddWithValue("@TicketsAvailable", ticketsAvailable);
+        myCommand.Parameters.AddWithValue("@TicketsQuantity", ticketsQuantity);
+
+        myCommand.ExecuteNonQuery();
+        myConnection.Close();
+
+
     }
 
     public void EditPlay(string editTitle, string editDate)
@@ -73,7 +73,7 @@ public class Play
         OleDbConnection myConnection = new OleDbConnection(connString);
         myConnection.Open();
 
-        OleDbCommand myCommand = new OleDbCommand("DELETE FROM Play WHERE Title = TitleDelete " , myConnection);
+        OleDbCommand myCommand = new OleDbCommand("DELETE FROM Plays WHERE Title = TitleDelete ", myConnection);
         myCommand.Parameters.AddWithValue("@TitleDelete", deleteTitle);
 
         myCommand.ExecuteNonQuery();
@@ -89,24 +89,25 @@ public class Play
         connString = @"Provider=Microsoft.JET.OLEDB.4.0;Data Source = L:\Comp-1632-System Development Project\TicketBookingSystem\TicketBookingSystem\TicketSysDB.mdb";
 
 
-        OleDbConnection myConnection = new OleDbConnection(connString);  
-	    myConnection.Open();
+        OleDbConnection myConnection = new OleDbConnection(connString);
+        myConnection.Open();
 
-	
+
         OleDbCommand myCommand = new OleDbCommand("SELECT Reviews FROM Plays WHERE Title = @Title", myConnection);
-    	myCommand.Parameters.AddWithValue("@Title", readTitle);
-	    
+        myCommand.Parameters.AddWithValue("@Title", readTitle);
+
+
 
         OleDbDataReader reader = myCommand.ExecuteReader();
         while (reader.Read())
         {
             returnReview = reader.GetString(0);
-            
+
         }
         reader.Close();
-	    return returnReview;
-	   
-    
+        return returnReview;
+
+
     }
 
 

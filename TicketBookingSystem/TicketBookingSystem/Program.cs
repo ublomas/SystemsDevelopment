@@ -17,6 +17,10 @@ namespace TicketBookingSystem
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
+
+            Play play = new Play();
+            play.AddPlay("A", "B", "C", "D", "E", "F", "G");
+
         }
     }
 }
