@@ -30,6 +30,7 @@ public class Play
     public addPlay(string addTitle, string addDate)
     {
 	OleDbConnection myConnection = new OleDbConnection(connstring);  
+	myConnection.Open();
         OleDbCommand myCommand = new OleDbCommand("INSERT INTO Play (Title, Genre, Description, Date, Time, TicketType, TicketsAvailable) VALUES (?,?,?,?,?,?,?)", myConnection);
    	
 	myCommand.Parameters.AddWithValue(@Title, title);
@@ -40,7 +41,7 @@ public class Play
 	myCommand.Parameters.AddWithValue(@TicketType, ticketType);
 	myCommand.Parameters.AddWithValue(@TicketsAvailable, ticketsAvailable);
 	    
-	myConnection.Open();
+	
 	myCommand.ExecuteNonQuery();
 	myConnection.Close();
 	    
@@ -62,15 +63,21 @@ public class Play
 
     public displayReview(string readTitle, string readDate)
     {
-        SELECT Reviews
+        OleDbConnection myConnection = new OleDbConnection(connstring);  
+	myConnection.Open();
+	
+        OleDbCommand myCommand = new OleDbCommand("SELECT Reviews FROM [Plays] WHERE [Title] = @Title /*&& WHERE [Date] = @Date*/", myConnection);
+   	myCommand.Parameters.AddWithValue(@Title, readTitle);
+	myCommand.ExecuteNonQuery();
+	    
+	    
+	    
+	//Need syntax for specifically returning data points.    
+	Return;
+	
+    
 
-        When Title = readTitle
-
-        When Date = readDate
-
-    from Plays
-
-    //^^ closer to real sql rather than pseudo
+    
     }
 
 
