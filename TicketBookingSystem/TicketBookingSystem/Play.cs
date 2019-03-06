@@ -1,4 +1,4 @@
-﻿/*
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,15 +19,32 @@ public class Play
     int ticketQuantity;
 
     // Might not need any full class variables if arguments are given in by the main. As this class doesn't create any objects with these varialbes, only pushes them between the code and database.
-    
+    string connString;
+    connString = @"Provider=Microsoft.JET.OLEDB.4.0;Data Source = L:\Comp-1632-System Development Project\TicketBookingSystem\TicketBookingSystem\TicketSysDB.mdb";
 
 
     //Unsure on what functionality can be implemented without a linked database being created before hand
-
-    //public addPlay(string addTitle, string addDate)
+   
+	
+	
+    public addPlay(string addTitle, string addDate)
     {
-        //pseudocode
-        ADD to database IN table Plays(addTitle, addDate, * Other variables*
+	OleDbConnection myConnection = new OleDbConnection(connstring);  
+        OleDbCommand myCommand = new OleDbCommand("INSERT INTO Play (Title, Genre, Description, Date, Time, TicketType, TicketsAvailable) VALUES (?,?,?,?,?,?,?)", myConnection);
+   	
+	myCommand.Parameters.AddWithValue(@Title, title);
+	myCommand.Parameters.AddWithValue(@Genre, genre);
+	myCommand.Parameters.AddWithValue(@Description, description);
+	myCommand.Parameters.AddWithValue(@Date, date);
+	myCommand.Parameters.AddWithValue(@Time, time);
+	myCommand.Parameters.AddWithValue(@TicketType, ticketType);
+	myCommand.Parameters.AddWithValue(@TicketsAvailable, ticketsAvailable);
+	    
+	myConnection.Open();
+	myCommand.ExecuteNonQuery();
+	myConnection.Close();
+	    
+	    
     }
 
     public editPlay(string editTitle, string editDate)
@@ -60,4 +77,3 @@ public class Play
     //Using both the title and its date as an identifier 
 
 }
-*/
