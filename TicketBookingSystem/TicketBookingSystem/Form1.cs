@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,6 +21,59 @@ namespace TicketBookingSystem
         {
             Account accountForm = new Account();
             accountForm.ShowDialog();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            BasketForm accountForm = new BasketForm();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            
+                string user = Userlabel.Text;
+                string play = PlayTitle.Text;
+                string ticketType = (sender as Button).Text;
+                int cost = Convert.ToInt32(Standardlabel.Text);
+                int quantity = Convert.ToInt32(NUD1.Value);
+                DateTime date = PlayDate.SelectionRange.Start;
+
+
+                ChosenPlays chosenPlays = new ChosenPlays();
+                chosenPlays.AddToOrder(user, play, cost, quantity, date, ticketType);
+                MessageBox.Show("Item Added");
+
+        }
+
+
+        private void Child_Click(object sender, EventArgs e)
+        {
+            string user = Userlabel.Text;
+            string play = PlayTitle.Text;
+            string ticketType = (sender as Button).Text;
+            int cost = Convert.ToInt32(Childlabel.Text);
+            int quantity = Convert.ToInt32(NUD2.Value);
+            DateTime date = PlayDate.SelectionRange.Start;
+
+
+            ChosenPlays chosenPlays = new ChosenPlays();
+            chosenPlays.AddToOrder(user, play, cost, quantity, date, ticketType);
+            MessageBox.Show("Item Added");
+        }
+
+        private void Elderly_Click(object sender, EventArgs e)
+        {
+            string user = Userlabel.Text;
+            string play = PlayTitle.Text;
+            string ticketType = (sender as Button).Text;
+            int cost = Convert.ToInt32(OAPlabel.Text);
+            int quantity = Convert.ToInt32(NUD3.Value);
+            DateTime date = PlayDate.SelectionRange.Start;
+
+
+            ChosenPlays chosenPlays = new ChosenPlays();
+            chosenPlays.AddToOrder(user, play, cost, quantity, date, ticketType);
+            MessageBox.Show("Item Added");
         }
     }
 }
